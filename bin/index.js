@@ -31,6 +31,15 @@ function startXmysql(sqlConfig) {
   /**************** END : setup mysql ****************/
 
   /**************** START : setup Xapi ****************/
+  // instruct about the users table needs to be created
+  console.log("Please create the users table before running this script.");
+  console.log("The users table should have the following columns:");
+  console.log("CREATE TABLE users (");
+  console.log("  id INT AUTO_INCREMENT PRIMARY KEY,");
+  console.log("  username VARCHAR(255) NOT NULL UNIQUE,");
+  console.log("  password VARCHAR(255) NOT NULL,");
+  console.log("  role VARCHAR(50) DEFAULT 'user'");
+  console.log(");");
   console.log("");
   console.log("");
   console.log("");
