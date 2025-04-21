@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XMySQL API Documentation</title>
+    <!-- Material UI CSS -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .card {
+            margin-bottom: 20px;
+        }
+        .endpoint {
+            font-family: monospace;
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        .curl-command {
+            background-color: #263238;
+            color: #fff;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            overflow-x: auto;
+        }
+        .response-example {
+            background-color: #e8f5e9;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        .nav-wrapper {
+            padding: 0 20px;
+        }
+        .section {
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="blue darken-3">
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo">XMySQL API Documentation</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="section">
+            <h4>Basic CRUD Operations</h4>
+            <div class="row">
+                <div class="col s12">
+                    <div class="card">
+                        <div class="card-content">
+                            <h5>List All Records</h5>
+                            <div class="endpoint">GET /api/tableName</div>
+                            <div class="curl-command">curl -X GET http://localhost:3000/api/tableName</div>
+                            <div class="response-example">
+                                <pre>[
+    {
+        "id": 1,
+        "name": "Example",
+        ...
+    }
+]</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s12">
+                    <div class="card">
+                        <div class="card-content">
+                            <h5>Create Record</h5>
+                            <div class="endpoint">POST /api/tableName</div>
+                            <div class="curl-command">curl -X POST -H "Content-Type: application/json" -d '{"field1":"value1","field2":"value2"}' http://localhost:3000/api/tableName</div>
+                            <div class="response-example">
+                                <pre>{
+    "id": 1,
+    "field1": "value1",
+    "field2": "value2"
+}</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s12">
+                    <div class="card">
+                        <div class="card-content">
+                            <h5>Get Single Record</h5>
+                            <div class="endpoint">GET /api/tableName/:id</div>
+                            <div class="curl-command">curl -X GET http://localhost:3000/api/tableName/1</div>
+                            <div class="response-example">
+                                <pre>{
+    "id": 1,
+    "field1": "value1",
+    "field2": "value2"
+}</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s12">
+                    <div class="card">
+                        <div class="card-content">
+                            <h5>Update Record</h5>
+                            <div class="endpoint">PATCH /api/tableName/:id</div>
+                            <div class="curl-command">curl -X PATCH -H "Content-Type: application/json" -d '{"field1":"newValue"}' http://localhost:3000/api/tableName/1</div>
+                            <div class="response-example">
+                                <pre>{
+    "id": 1,
+    "field1": "newValue",
+    "field2": "value2"
+}</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s12">
+                    <div class="card">
+                        <div class="card-content">
+                            <h5>Delete Record</h5>
+                            <div class="endpoint">DELETE /api/tableName/:id</div>
+                            <div class="curl-command">curl -X DELETE http://localhost:3000/api/tableName/1</div>
+                            <div class="response-example">
+                                <pre>{
+    "message": "Record deleted successfully"
+}</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h4>Advanced Operations</h4>
+            <div class="row">
+                <div class="col s12">
+                    <div class="card">
+                        <div class="card-content">
+                            <h5>Bulk Operations</h5>
+                            <div class="endpoint">POST /api/tableName/bulk</div>
+                            <div class="curl-command">curl -X POST -H "Content-Type: application/json" -d '[{"field1":"value1"},{"field1":"value2"}]' http://localhost:3000/api/tableName/bulk</div>
+                            <div class="response-example">
+                                <pre>{
+    "message": "2 records created successfully"
+}</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s12">
+                    <div class="card">
+                        <div class="card-content">
+                            <h5>Find One</h5>
+                            <div class="endpoint">GET /api/tableName/findOne</div>
+                            <div class="curl-command">curl -X GET "http://localhost:3000/api/tableName/findOne?_where=(field1,eq,value1)"</div>
+                            <div class="response-example">
+                                <pre>{
+    "id": 1,
+    "field1": "value1",
+    "field2": "value2"
+}</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s12">
+                    <div class="card">
+                        <div class="card-content">
+                            <h5>Count</h5>
+                            <div class="endpoint">GET /api/tableName/count</div>
+                            <div class="curl-command">curl -X GET http://localhost:3000/api/tableName/count</div>
+                            <div class="response-example">
+                                <pre>{
+    "count": 100
+}</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s12">
+                    <div class="card">
+                        <div class="card-content">
+                            <h5>Distinct</h5>
+                            <div class="endpoint">GET /api/tableName/distinct</div>
+                            <div class="curl-command">curl -X GET "http://localhost:3000/api/tableName/distinct?_fields=field1"</div>
+                            <div class="response-example">
+                                <pre>[
+    {"field1": "value1"},
+    {"field1": "value2"}
+]</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h4>Authentication</h4>
+            <div class="row">
+                <div class="col s12">
+                    <div class="card">
+                        <div class="card-content">
+                            <h5>Login</h5>
+                            <div class="endpoint">POST /api/auth/login</div>
+                            <div class="curl-command">curl -X POST -H "Content-Type: application/json" -d '{"username":"test","password":"test"}' http://localhost:3000/api/auth/login</div>
+                            <div class="response-example">
+                                <pre>{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+    "user": {
+        "id": 1,
+        "username": "test",
+        "role": "user"
+    }
+}</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s12">
+                    <div class="card">
+                        <div class="card-content">
+                            <h5>Register</h5>
+                            <div class="endpoint">POST /api/auth/register</div>
+                            <div class="curl-command">curl -X POST -H "Content-Type: application/json" -d '{"username":"newuser","password":"password"}' http://localhost:3000/api/auth/register</div>
+                            <div class="response-example">
+                                <pre>{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+    "user": {
+        "id": 2,
+        "username": "newuser",
+        "role": "user"
+    }
+}</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Material UI JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html> 
